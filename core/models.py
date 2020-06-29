@@ -3,6 +3,7 @@ from django.db import models
 
 # Create your models here.
 from django.db.models import Count
+from django.db.models.signals import post_save
 
 
 class LinkVoteCountManager(models.Manager):
@@ -28,3 +29,20 @@ class Link(models.Model):
 class Vote(models.Model):
     voter = models.ForeignKey(User, on_delete=models.CASCADE)
     link = models.ForeignKey(Link, on_delete=models.CASCADE)
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, unique=True, on_delete=models.CASCADE)
+    bio = models.TextField(null=True)
+
+    def __str__(self):
+        return self.user
+
+
+def create_profile(sender, instance, created, **kwargs):
+    if created:
+        profile, created = UserProfile.objects.get_or_create(user=instance)
+
+
+# Signal while saving user
+post_save.connect(create_profile, sender=User)
