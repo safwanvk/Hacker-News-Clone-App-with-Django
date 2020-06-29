@@ -4,4 +4,4 @@ from django.contrib.auth.models import User
 
 class UserCreationForm(UserCreationForm):
     model = User
-    field = '__all__'
+    fields = '__all__'
