@@ -8,7 +8,12 @@
 </head>
 <body>
 <li><b>name:{{ object.username }}</b></li>
-<li><b>bio:{{ object }}</b></li>
+<li><b>bio:{{ object.userprofile.bio  }}</b></li>
+{% if object.username == user.username %}
+<p>
+    <a href="{% url 'core:edit-profile' %}">Edit Profile</a>
+</p>
+{% endif %}
 </body>
 </html>
 {% endblock %}
