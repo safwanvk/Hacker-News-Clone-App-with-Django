@@ -30,13 +30,16 @@ class Vote(models.Model):
     voter = models.ForeignKey(User, on_delete=models.CASCADE)
     link = models.ForeignKey(Link, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return '%s upvotes %s' % (self.voter.username, self.link.title)
+
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, unique=True, on_delete=models.CASCADE)
     bio = models.TextField(null=True)
 
     def __str__(self):
-        return self.user
+        return "%s's profile" % self.user
 
 
 def create_profile(sender, instance, created, **kwargs):

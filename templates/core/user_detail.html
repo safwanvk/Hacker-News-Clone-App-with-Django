@@ -4,15 +4,11 @@
 {% block content %}
 <head>
     <meta charset="UTF-8">
-    <title>Link List</title>
+    <title>User Detail</title>
 </head>
 <body>
-{% for link in object_list %}
-<li>
-    <a href="{{ link.url }}"><b>{{ link.title }}</b></a>
-</li>
-{% endfor %}
-
+<li><b>name:{{ object.username }}</b></li>
+<li><b>bio:{{ object }}</b></li>
 </body>
 </html>
 {% endblock %}
