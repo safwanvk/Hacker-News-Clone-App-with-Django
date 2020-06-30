@@ -4,6 +4,7 @@ from django.db import models
 # Create your models here.
 from django.db.models import Count
 from django.db.models.signals import post_save
+from django.urls import reverse
 
 
 class LinkVoteCountManager(models.Manager):
@@ -24,6 +25,9 @@ class Link(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('core:link-list')
 
 
 class Vote(models.Model):
