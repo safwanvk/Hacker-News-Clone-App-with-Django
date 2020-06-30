@@ -56,3 +56,9 @@ class LinkCreateView(CreateView):
 class LinkDetailView(DetailView):
     model = Link
     template_name = "core/link_detail.html"
+
+
+class LinkUpdateView(UpdateView):
+    model = Link
+    form_class = LinkForm
+    template_name = "core/update_link.html"

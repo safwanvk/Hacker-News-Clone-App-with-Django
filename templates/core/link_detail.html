@@ -5,7 +5,10 @@
     <title>Link Detail</title>
 </head>
 <body>
-<li><a href="{{ link.url }}">{{ object.title }}</a></li>
+<h2><a href="{{ link.url }}">{{ object.title }}</a></h2>
+{% if object.submitter == user %}
+<a href="{% url 'core:update_link' pk=object.pk %}">Update</a>
+{% endif %}
 <li>{{ object.link_score }}</li>
 <li>{{ object.description }}</li>
 By <b>{{ object.submitter }}</b>
