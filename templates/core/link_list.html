@@ -8,12 +8,15 @@
 </head>
 <body>
 {% for link in object_list %}
-<li>
-    [
-    {{ link.vote_score }}
-    ]
+<form method="post" action="{% url 'core:vote' %}" class="vote_form">
+<li>[{{ link.votes }}]
+    {% csrf_token %}
+    <input type="hidden" id="id_link" name="link" class="hidden_id" value="{{ link.pk }}" />
+    <input type="hidden" id="id_voter" name="voter" class="hidden_id" value="{{ user.pk }}" />
+    <button>+</button>
     <a href="{{ link.get_absolute_url }}"><b>{{ link.title }}</b></a>
 </li>
+</form>
 {% endfor %}
 {% if is_paginated %}
     <div class="pagination">

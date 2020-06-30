@@ -2,7 +2,8 @@
 from django.urls import path
 
 from .views import LinkListView, \
-    UserProfileDetailView, UserProfileUpdateView, LinkCreateView, LinkDetailView, LinkUpdateView, LinkDeleteView
+    UserProfileDetailView, UserProfileUpdateView, LinkCreateView, LinkDetailView, LinkUpdateView, LinkDeleteView, \
+    VoteFormView
 
 app_name = 'core'
 
@@ -14,5 +15,6 @@ urlpatterns = [
     path('link-detail/<pk>', LinkDetailView.as_view(), name='link_detail'),
     path('update-link/<pk>', LinkUpdateView.as_view(), name='update_link'),
     path('delete-link/<pk>', LinkDeleteView.as_view(), name='delete_link'),
+    path('vote', VoteFormView.as_view(), name='vote'),
 
 ]
