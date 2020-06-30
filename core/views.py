@@ -17,12 +17,12 @@ class LinkListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(LinkListView, self).get_context_data(**kwargs)
-
-        voted = Vote.objects.filter(voter=self.request.user)
-        links_in_page = [link.id for link in context["object_list"]]
-        voted = voted.filter(link_id__in=links_in_page)
-        voted = voted.values_list('link_id', flat=True)
-        context["voted"] = voted
+        if self.request.user.is_authenticated:
+            voted = Vote.objects.filter(voter=self.request.user)
+            links_in_page = [link.id for link in context["object_list"]]
+            voted = voted.filter(link_id__in=links_in_page)
+            voted = voted.values_list('link_id', flat=True)
+            context["voted"] = voted
 
         return context
 
