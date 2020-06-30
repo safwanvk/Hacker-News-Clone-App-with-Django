@@ -27,7 +27,7 @@ class Link(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('core:link-list')
+        return reverse("core:link_detail", kwargs={"pk": str(self.id)})
 
 
 class Vote(models.Model):

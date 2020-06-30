@@ -52,3 +52,7 @@ class LinkCreateView(CreateView):
 
         return super(LinkCreateView, self).form_valid(form)
 
+
+class LinkDetailView(DetailView):
+    model = Link
+    template_name = "core/link_detail.html"

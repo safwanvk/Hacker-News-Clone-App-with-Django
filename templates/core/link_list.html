@@ -9,7 +9,10 @@
 <body>
 {% for link in object_list %}
 <li>
-    <a href="{{ link.url }}"><b>{{ link.title }}</b></a>
+    [
+    {{ link.vote_score }}
+    ]
+    <a href="{{ link.get_absolute_url }}"><b>{{ link.title }}</b></a>
 </li>
 {% endfor %}
 {% if is_paginated %}
