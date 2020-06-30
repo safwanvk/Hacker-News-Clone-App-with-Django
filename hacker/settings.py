@@ -123,3 +123,7 @@ STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = 'core:link-list'
 LOGIN_REDIRECT_URL = '/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'core/static')
+]

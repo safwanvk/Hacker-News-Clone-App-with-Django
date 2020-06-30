@@ -17,6 +17,7 @@ class LinkListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(LinkListView, self).get_context_data(**kwargs)
+
         voted = Vote.objects.filter(voter=self.request.user)
         links_in_page = [link.id for link in context["object_list"]]
         voted = voted.filter(link_id__in=links_in_page)
@@ -63,8 +64,6 @@ class LinkCreateView(CreateView):
         return super(LinkCreateView, self).form_valid(form)
 
 
-
-
 class LinkDetailView(DetailView):
     model = Link
     template_name = "core/link_detail.html"
@@ -83,7 +82,10 @@ class LinkDeleteView(DeleteView):
 
 
 class VoteFormView(FormView):
+    model = Vote
     form_class = VoteForm
+    template_name = "core/link_list.html"
+    success_url = '/'
 
     def form_valid(self, form):
         link = get_object_or_404(Link, pk=form.data['link'])
@@ -105,6 +107,3 @@ class VoteFormView(FormView):
     def form_invalid(self, form):
         print('invalid')
         return redirect('/')
-
-
-
