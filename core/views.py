@@ -3,7 +3,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.urls import reverse
-from django.views.generic import ListView, DetailView, UpdateView, CreateView
+from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView
 
 from .forms import UserProfileForm, LinkForm
 from .models import Link, UserProfile
@@ -62,3 +62,9 @@ class LinkUpdateView(UpdateView):
     model = Link
     form_class = LinkForm
     template_name = "core/update_link.html"
+
+
+class LinkDeleteView(DeleteView):
+    model = Link
+    template_name = "core/delete_link.html"
+    success_url = '/'

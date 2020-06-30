@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Link</title>
+</head>
+<body>
+<form method="POST">
+    {% csrf_token %}
+    <h2>Are you sure?</h2>
+    <input type="submit" value="Delete">
+</form>
+</body>
+</html>

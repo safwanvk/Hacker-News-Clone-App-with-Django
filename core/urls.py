@@ -2,7 +2,7 @@
 from django.urls import path
 
 from .views import LinkListView, \
-    UserProfileDetailView, UserProfileUpdateView, LinkCreateView, LinkDetailView, LinkUpdateView
+    UserProfileDetailView, UserProfileUpdateView, LinkCreateView, LinkDetailView, LinkUpdateView, LinkDeleteView
 
 app_name = 'core'
 
@@ -13,5 +13,6 @@ urlpatterns = [
     path('create-link/', LinkCreateView.as_view(), name='create_link'),
     path('link-detail/<pk>', LinkDetailView.as_view(), name='link_detail'),
     path('update-link/<pk>', LinkUpdateView.as_view(), name='update_link'),
+    path('delete-link/<pk>', LinkDeleteView.as_view(), name='delete_link'),
 
 ]
