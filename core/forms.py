@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import UserProfile, Link, Vote
+from .models import UserProfile, Link, Vote, Comment
 
 
 class UserProfileForm(forms.ModelForm):
@@ -22,3 +22,9 @@ class VoteForm(forms.ModelForm):
         model = Vote
         fields = '__all__'
         exclude = ['voter', 'link']
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['body']

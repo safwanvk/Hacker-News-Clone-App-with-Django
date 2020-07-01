@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
 
-from .models import Link, Vote, UserProfile
+from .models import Link, Vote, UserProfile, Comment
 
 
 class VoteAdmin(admin.ModelAdmin):
@@ -15,10 +15,6 @@ class LinkAdmin(admin.ModelAdmin):
     pass
 
 
-admin.site.register(Link, LinkAdmin)
-admin.site.register(Vote, VoteAdmin)
-
-
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('commenter', 'body', 'link', 'created_on', 'active')
     list_filter = ('active', 'created_on')
@@ -27,6 +23,14 @@ class CommentAdmin(admin.ModelAdmin):
 
     def approve_comments(self, request, queryset):
         queryset.update(active=True)
+
+
+admin.site.register(Link, LinkAdmin)
+admin.site.register(Vote, VoteAdmin)
+admin.site.register(Comment, CommentAdmin)
+
+
+
 
 
 class UserProfileInline(admin.StackedInline):
