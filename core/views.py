@@ -12,7 +12,6 @@ from .models import Link, UserProfile, Vote
 class LinkListView(ListView):
     model = Link
     template_name = "core/link_list.html"
-    queryset = Link.with_votes.all()
     paginate_by = 3
 
     def get_context_data(self, **kwargs):
@@ -96,10 +95,14 @@ class VoteFormView(FormView):
         if not has_voted:
             # add vote
             Vote.objects.create(voter=user, link=link)
+            link.votes_total += 1
+            link.save()
             print('voted')
         else:
             # delete vote
             prev_votes[0].delete()
+            link.votes_total -= 1
+            link.save()
             print('unvoted')
 
         return redirect('/')

@@ -6,8 +6,17 @@ from django.contrib.auth.admin import UserAdmin
 
 from .models import Link, Vote, UserProfile
 
-admin.site.register(Link)
-admin.site.register(Vote)
+
+class VoteAdmin(admin.ModelAdmin):
+    pass
+
+
+class LinkAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(Link, LinkAdmin)
+admin.site.register(Vote, VoteAdmin)
 
 
 class UserProfileInline(admin.StackedInline):

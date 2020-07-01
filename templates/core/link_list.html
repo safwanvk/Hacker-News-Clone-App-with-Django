@@ -9,7 +9,7 @@
 <body>
 {% for link in object_list %}
 <form method="POST" action="{% url 'core:vote' %}" class="vote_form">
-    <li>[{{ link.votes }}]
+    <li>[{{ link.votes_total }}]
         {% csrf_token %}
         <input type="hidden" id="id_link" name="link" class="hidden_id" value="{{ link.pk }}" />
         <input type="hidden" id="id_voter" name="voter" class="hidden_id" value="{{ user.pk }}" />

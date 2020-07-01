@@ -8,10 +8,7 @@ from django.urls import reverse
 from django.utils.timezone import now
 
 
-class LinkVoteCountManager(models.Manager):
-    def get_query_self(self):
-        return super(LinkVoteCountManager, self).get_query_set().annotate(
-            votes=Count('vote')).order_by('-vote_score', '-votes')
+
 
 
 class Link(models.Model):
@@ -21,8 +18,9 @@ class Link(models.Model):
     rank_score = models.FloatField(default=0.0)
     url = models.URLField(max_length=250, blank=True)
     description = models.TextField(blank=True)
-    with_votes = LinkVoteCountManager()
-    objects = models.Manager()
+    votes_total = models.IntegerField(default=0)
+
+
 
     def __str__(self):
         return self.title
@@ -32,6 +30,7 @@ class Link(models.Model):
 
     def set_rank(self):
         # Based on HN ranking algo at http://amix.dk/blog/post/19574
+
         SECS_IN_HOUR = float(60 * 60)
         GRAVITY = 1.2
 
@@ -40,12 +39,6 @@ class Link(models.Model):
         votes = self.votes - 1
         self.rank_score = votes / pow((item_hour_age + 2), GRAVITY)
         self.save()
-
-
-class LinkVoteCountManager(models.Manager):
-    def get_query_self(self):
-        return super(LinkVoteCountManager, self).get_query_set().annotate(
-            votes=Count('vote')).order_by('-rank_score', '-votes')
 
 
 class Vote(models.Model):
