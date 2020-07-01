@@ -7,7 +7,7 @@
 <body>
 <div class="container">
   <div class="row">
-  {% for comment in object_list %}
+  {% for comment in comments %}
         <div class="comments" style="padding: 10px;">
           <p class="font-weight-bold">
             {{ comment.commenter }}
@@ -17,7 +17,7 @@
           </p>
           {{ comment.body | linebreaks }}
         </div>
-        {% endfor %}
+  {% endfor %}
   </div>
     <a href="{% url 'core:create_comment' %}">Leave a comment</a>
 </div>

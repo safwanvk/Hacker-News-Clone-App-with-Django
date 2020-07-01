@@ -17,6 +17,13 @@ class LinkListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(LinkListView, self).get_context_data(**kwargs)
+
+        context['comment_count'] = Comment.objects.filter(link_id=self.id).count()
+
+        return context
+
+    def get_context_data(self, **kwargs):
+        context = super(LinkListView, self).get_context_data(**kwargs)
         if self.request.user.is_authenticated:
             voted = Vote.objects.filter(voter=self.request.user)
             links_in_page = [link.id for link in context["object_list"]]
@@ -116,19 +123,21 @@ class CommentListView(ListView):
     model = Comment
     template_name = "core/comments_details.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
 
 class CommentCreateView(CreateView):
-    model = Link
-    form_class = CommentForm
+    model = Comment
+    fields = ['body']
     template_name = "core/create_comment.html"
 
-    def form_valid(self, form):
+    def post_valid(self, form):
+        links = get_object_or_404(Link, slug=self.request.slug)
         f = form.save(commit=False)
         f.commenter = self.request.user
-        f.link = Link.title
+        f.link = links
         f.save()
 
-        return super(LinkCreateView, self).form_valid(form)
-
-
-
+        return redirect('core:create_comment', slug=links.slug)
