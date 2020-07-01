@@ -19,6 +19,16 @@ admin.site.register(Link, LinkAdmin)
 admin.site.register(Vote, VoteAdmin)
 
 
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('commenter', 'body', 'link', 'created_on', 'active')
+    list_filter = ('active', 'created_on')
+    search_fields = ('name', 'body')
+    actions = ['approve_comments']
+
+    def approve_comments(self, request, queryset):
+        queryset.update(active=True)
+
+
 class UserProfileInline(admin.StackedInline):
     model = UserProfile
     can_delete = False

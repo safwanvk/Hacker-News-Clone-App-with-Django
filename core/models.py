@@ -31,6 +31,20 @@ class Vote(models.Model):
         return '%s upvotes %s' % (self.voter.username, self.link.title)
 
 
+class Comment(models.Model):
+    link = models.ForeignKey(Link, on_delete=models.CASCADE)
+    commenter = models.ForeignKey(User, on_delete=models.CASCADE)
+    body = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+    active = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ['created_on']
+
+    def __str__(self):
+        return 'Comment {} by {}'.format(self.body, self.name)
+
+
 class UserProfile(models.Model):
     user = models.OneToOneField(User, unique=True, on_delete=models.CASCADE)
     bio = models.TextField(null=True)
