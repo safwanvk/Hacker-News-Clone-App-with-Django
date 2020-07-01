@@ -5,8 +5,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView, FormView
 
-from .forms import UserProfileForm, LinkForm, VoteForm
-from .models import Link, UserProfile, Vote
+from .forms import UserProfileForm, LinkForm, VoteForm, CommentForm
+from .models import Link, UserProfile, Vote, Comment
 
 
 class LinkListView(ListView):
@@ -110,3 +110,25 @@ class VoteFormView(FormView):
     def form_invalid(self, form):
         print('invalid')
         return redirect('/')
+
+
+class CommentListView(ListView):
+    model = Comment
+    template_name = "core/comments_details.html"
+
+
+class CommentCreateView(CreateView):
+    model = Link
+    form_class = CommentForm
+    template_name = "core/create_comment.html"
+
+    def form_valid(self, form):
+        f = form.save(commit=False)
+        f.commenter = self.request.user
+        f.link = Link.title
+        f.save()
+
+        return super(LinkCreateView, self).form_valid(form)
+
+
+

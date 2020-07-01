@@ -42,7 +42,10 @@ class Comment(models.Model):
         ordering = ['created_on']
 
     def __str__(self):
-        return 'Comment {} by {}'.format(self.body, self.name)
+        return 'Comment {} by {}'.format(self.body, self.commenter)
+
+    def get_absolute_url1(self):
+        return reverse("core:comment_detail", kwargs={"pk": str(self.id)})
 
 
 class UserProfile(models.Model):
