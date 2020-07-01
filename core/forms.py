@@ -16,7 +16,7 @@ class LinkForm(forms.ModelForm):
     class Meta:
         model = Link
         fields = '__all__'
-        exclude = ['submitter', 'vote_score']
+        exclude = ['submitter']
 
 
 class VoteForm(forms.ModelForm):

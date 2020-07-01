@@ -12,6 +12,7 @@ from .models import Link, UserProfile, Vote
 class LinkListView(ListView):
     model = Link
     template_name = "core/link_list.html"
+    queryset = Link.objects.filter().order_by('-votes_total')
     paginate_by = 3
 
     def get_context_data(self, **kwargs):
@@ -56,7 +57,6 @@ class LinkCreateView(CreateView):
 
     def form_valid(self, form):
         f = form.save(commit=False)
-        f.rank_score = 0.0
         f.submitter = self.request.user
         f.save()
 

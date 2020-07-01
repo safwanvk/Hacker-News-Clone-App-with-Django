@@ -8,19 +8,13 @@ from django.urls import reverse
 from django.utils.timezone import now
 
 
-
-
-
 class Link(models.Model):
     title = models.CharField(max_length=250)
     submitter = models.ForeignKey(User, on_delete=models.CASCADE)
     submitted_on = models.DateTimeField(auto_now_add=True)
-    rank_score = models.FloatField(default=0.0)
     url = models.URLField(max_length=250, blank=True)
     description = models.TextField(blank=True)
     votes_total = models.IntegerField(default=0)
-
-
 
     def __str__(self):
         return self.title
@@ -28,17 +22,7 @@ class Link(models.Model):
     def get_absolute_url(self):
         return reverse("core:link_detail", kwargs={"pk": str(self.id)})
 
-    def set_rank(self):
-        # Based on HN ranking algo at http://amix.dk/blog/post/19574
 
-        SECS_IN_HOUR = float(60 * 60)
-        GRAVITY = 1.2
-
-        delta = now() - self.submitted_on
-        item_hour_age = delta.total_seconds() // SECS_IN_HOUR
-        votes = self.votes - 1
-        self.rank_score = votes / pow((item_hour_age + 2), GRAVITY)
-        self.save()
 
 
 class Vote(models.Model):
