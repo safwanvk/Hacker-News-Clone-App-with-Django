@@ -23,8 +23,6 @@ class Link(models.Model):
         return reverse("core:link_detail", kwargs={"pk": str(self.id)})
 
 
-
-
 class Vote(models.Model):
     voter = models.ForeignKey(User, on_delete=models.CASCADE)
     link = models.ForeignKey(Link, on_delete=models.CASCADE)

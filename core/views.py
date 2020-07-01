@@ -44,10 +44,10 @@ class UserProfileUpdateView(UpdateView):
     template_name = "core/edit_profile.html"
 
     def get_object(self, queryset=None):
-        return UserProfile.objects.get_or_create(user=self.request.user)
+        return UserProfile.objects.get_or_create(user=self.request.user)[0]
 
     def get_success_url(self):
-        return reverse('profile', kwargs={'slug': self.request.user})
+        return reverse('core:profile', kwargs={'slug': self.request.user})
 
 
 class LinkCreateView(CreateView):

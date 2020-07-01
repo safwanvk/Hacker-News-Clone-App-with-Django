@@ -4,15 +4,13 @@ from .models import UserProfile, Link, Vote
 
 
 class UserProfileForm(forms.ModelForm):
-
     class Meta:
         model = UserProfile
         fields = '__all__'
-        exclude = ('user',)
+        exclude = ['user']
 
 
 class LinkForm(forms.ModelForm):
-
     class Meta:
         model = Link
         fields = '__all__'
@@ -20,7 +18,6 @@ class LinkForm(forms.ModelForm):
 
 
 class VoteForm(forms.ModelForm):
-
     class Meta:
         model = Vote
         fields = '__all__'
