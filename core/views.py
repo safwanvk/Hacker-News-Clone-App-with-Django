@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.shortcuts import render, get_object_or_404, redirect
 
 # Create your views here.
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView, FormView
 
 from .forms import UserProfileForm, LinkForm, VoteForm, CommentForm
@@ -119,25 +119,16 @@ class VoteFormView(FormView):
         return redirect('/')
 
 
-class CommentListView(ListView):
-    model = Comment
-    template_name = "core/comments_details.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
-
-
 class CommentCreateView(CreateView):
     model = Comment
-    fields = ['body']
+    form_class = CommentForm
     template_name = "core/create_comment.html"
 
-    def post_valid(self, form):
-        links = get_object_or_404(Link, slug=self.request.slug)
-        f = form.save(commit=False)
-        f.commenter = self.request.user
-        f.link = links
-        f.save()
+    def get_success_url(self):
+        return reverse_lazy('core:link-list')
 
-        return redirect('core:create_comment', slug=links.slug)
+    def form_valid(self, form):
+        form.instance.commenter = self.request.user
+        form.instance.link = Link.objects.get(pk=self.kwargs['pk'])
+        form.save()
+        return super(CommentCreateView, self).form_valid(form)

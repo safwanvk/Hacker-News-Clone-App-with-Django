@@ -13,5 +13,15 @@
 <li>{{ object.link_score }}</li>
 <li>{{ object.description }}</li>
 By <b>{{ object.submitter }}</b>
+<a href="{% url 'core:create_comment' link.id %}">Leave a comment</a>
+{% for comment in link.comments.all %}
+        <ul class="list-group">
+            <li class="list-group-item">{{ comment.body }}
+                <div class="Link-detail">
+                    {{ comment.commenter }}
+                </div>
+            </li>
+        </ul>
+{% endfor %}
 </body>
 </html>

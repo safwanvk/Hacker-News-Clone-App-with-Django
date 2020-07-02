@@ -22,6 +22,9 @@ class Link(models.Model):
     def get_absolute_url(self):
         return reverse("core:link_detail", kwargs={"pk": str(self.id)})
 
+    def get_absolute_url1(self):
+        return reverse("core:comment_detail", kwargs={"pk": str(self.id)})
+
 
 class Vote(models.Model):
     voter = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -32,11 +35,11 @@ class Vote(models.Model):
 
 
 class Comment(models.Model):
-    link = models.ForeignKey(Link, on_delete=models.CASCADE)
+    link = models.ForeignKey(Link, on_delete=models.CASCADE, related_name='comments')
     commenter = models.ForeignKey(User, on_delete=models.CASCADE)
     body = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
-    active = models.BooleanField(default=False)
+
 
     class Meta:
         ordering = ['created_on']
@@ -44,8 +47,7 @@ class Comment(models.Model):
     def __str__(self):
         return 'Comment {} by {}'.format(self.body, self.commenter)
 
-    def get_absolute_url1(self):
-        return reverse("core:comment_detail", kwargs={"pk": str(self.id)})
+
 
 
 class UserProfile(models.Model):

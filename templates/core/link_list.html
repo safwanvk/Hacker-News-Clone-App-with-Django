@@ -20,8 +20,8 @@
         {% else %}
         <button>-</button>
         {% endif %}
-        <a href="{{ link.get_absolute_url }}"><b>{{ link.title }}</b></a>
-        <a href="{% url 'core:comment_detail' pk=link.pk %}"><b>{{ link.comment_set.count }}comments</b></a>
+        <a href="{{ link.url }}"><b>{{ link.title }}</b></a>
+        <a href="{{ link.get_absolute_url }}"><b>{{ link.comments.count }}comments</b></a>
     </li>
 </form>
 {% endfor %}
