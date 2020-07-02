@@ -24,9 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '0y$4b58@q1qc#ku^z6u4g(&$__61131x1$%(xpl-p(yeegrmcl'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://zabnews.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
