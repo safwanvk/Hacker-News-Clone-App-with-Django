@@ -1,37 +1,54 @@
 {% extends 'core/base.html' %}
-<!DOCTYPE html>
-<html lang="en">
+
 {% block content %}
-<head>
-    <meta charset="UTF-8">
-    <title>Link List</title>
-</head>
-<body>
-{% for link in object_list %}
-<form method="POST" action="{% url 'core:vote' %}" class="vote_form">
-    <li>[{{ link.votes_total }}]
-        {% csrf_token %}
-        <input type="hidden" id="id_link" name="link" class="hidden_id" value="{{ link.pk }}" />
-        <input type="hidden" id="id_voter" name="voter" class="hidden_id" value="{{ user.pk }}" />
-        {% if not user.is_authenticated %}
-        <button disabled title="Please login to vote">+</button>
-        {% elif link.pk not in voted %}
-        <button>+</button>
-        {% else %}
-        <button>-</button>
-        {% endif %}
-        <a href="{{ link.url }}"><b>{{ link.title }}</b></a>
-        <a href="{{ link.get_absolute_url }}"><b>{{ link.comments.count }}comments</b></a>
-    </li>
-</form>
-{% endfor %}
-{% if is_paginated %}
+<ol class="list-group">
+    {% for link in object_list %}
+
+        <li class="list-group-item">
+            <form method="POST" action="{% url 'core:vote' %}" class="vote_form">
+                {% csrf_token %}
+                <input type="hidden" id="id_link" name="link" class="hidden_id" value="{{ link.pk }}" />
+                <input type="hidden" id="id_voter" name="voter" class="hidden_id" value="{{ user.pk }}" />
+                {% if not user.is_authenticated %}
+                <button disabled title="Please login to vote">+</button>
+                {% elif link.pk not in voted %}
+                <button>+</button>
+                {% else %}
+                <button>-</button>
+                {% endif %}
+                <a href="{{ link.url }}"><b>{{ link.title }}</b></a>
+                <div class="Link-detail">
+                    <span>{{ link.votes_total }} points</span> |
+                   <span>submited by {{ new.submitter }}</span> |
+                   <a class="Link-link" href="{{ link.get_absolute_url }}">comments: {{ link.comments.count }}</a>
+                 </div>
+            </form>
+        </li>
+    {% endfor %}
+    {% if is_paginated %}
     <div class="pagination">
         {% if page_obj.has_next %}
         <a href="?page={{ page_obj.next_page_number }}">More &raquo;</a>
         {% endif %}
     </div>
 {% endif %}
-</body>
-</html>
-{% endblock %}
+</ol>
+
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
