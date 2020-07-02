@@ -10,5 +10,5 @@ def register_view(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect(reverse('login'))
+            return redirect(reverse('accounts:login'))
     return render(request, 'accounts/register.html', {'form': form})
