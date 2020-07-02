@@ -1,14 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>login</title>
-</head>
-<body>
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<div class="col-md-8 Link-form">
+<h1>Sign in to ZabNews</h1>
+
 <form method="POST">
     {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="sign in">
+    {{ form.as_p}}
+    <input type="Submit" class="btn btn-success btn-sm" value="Sign in"><br>
+    New to ZabNews?<a href="{% url 'accounts:register' %}" >Create an account. </a>
 </form>
-</body>
-</html>
+</div>
+{% endblock content %}
+
+

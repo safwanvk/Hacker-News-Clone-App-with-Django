@@ -13,7 +13,7 @@ class LinkListView(ListView):
     model = Link
     template_name = "core/link_list.html"
     queryset = Link.objects.filter().order_by('-votes_total')
-    paginate_by = 3
+    paginate_by = 10
 
     def get_context_data(self, **kwargs):
         context = super(LinkListView, self).get_context_data(**kwargs)
