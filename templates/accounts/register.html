@@ -1,5 +1,5 @@
 {% extends 'core/base.html' %}
-
+{% load crispy_forms_filters %}
 {% block content %}
 
 <div class="col-md-8 Link-form">
@@ -8,7 +8,7 @@
 
 <form method="POST">
     {% csrf_token %}
-    {{ form.as_p}}
+    {{ form|crispy }}
     <input type="Submit" class="btn btn-success btn-sm" value="Create account"><br>
 
 </form>

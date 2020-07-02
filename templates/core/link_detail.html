@@ -9,16 +9,14 @@
         <p>{{ object.description }}</p>
         {{ object.votes_total }} points |
         <span>Submited by {{ object.submitter }}</span> |
-        <span>Comments: {{ link.comments.count }}</span><br>
+        <span>Comments: {{ link.comments.count }}</span>
+    </div>
             {% if object.submitter == user %}
                <a href="{% url 'core:update_link' pk=object.pk %}" class="btn btn-primary btn-sm">edit</a>
                <a href="{% url 'core:delete_link' pk=object.pk %}" class="btn btn-danger btn-sm">delete</a>
             {% endif %}
-
-    </div>
-
-
-    {% for comment in link.comments.all %}
+<h3>Comments</h3>
+{% for comment in link.comments.all %}
         <ul class="list-group">
             <li class="list-group-item">{{ comment.body }}
                 <div class="Link-detail">
@@ -26,7 +24,10 @@
                 </div>
             </li>
         </ul>
+      {% empty %}
+		      <p>No comment yet</p>
     {% endfor %}
+<br>
         <a class="btn btn-primary btn-sm" href="{% url 'core:create_comment' link.id %}">Add new comment</a>
 
 {% endblock content %}

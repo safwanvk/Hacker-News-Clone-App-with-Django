@@ -24,6 +24,8 @@
                  </div>
             </form>
         </li>
+    {% empty %}
+		      <p>No link yet</p>
     {% endfor %}
     {% if is_paginated %}
     <div class="pagination">
