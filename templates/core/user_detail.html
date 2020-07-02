@@ -1,19 +1,26 @@
+
 {% extends 'core/base.html' %}
-<!DOCTYPE html>
-<html lang="en">
+
 {% block content %}
-<head>
-    <meta charset="UTF-8">
-    <title>User Detail</title>
-</head>
-<body>
-<li><b>name:{{ object.username }}</b></li>
-<li><b>bio:{{ object.userprofile.bio  }}</b></li>
-{% if object.username == user.username %}
-<p>
-    <a href="{% url 'core:edit_profile' %}">Edit Profile</a>
-</p>
-{% endif %}
-</body>
-</html>
-{% endblock %}
+
+
+
+    <div class="Link-detail">
+        <b>name:{{ object.username }}</b><br>
+        <b>bio:{{ object.userprofile.bio  }}</b>
+        {% if object.username == user.username %}
+        <p>
+            <a href="{% url 'core:edit_profile' %}" class="btn btn-primary btn-sm">Edit Profile</a>
+        </p>
+        {% endif %}
+    </div>
+
+{% endblock content %}
+
+
+
+
+
+
+
+

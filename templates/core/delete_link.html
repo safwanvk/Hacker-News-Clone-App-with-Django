@@ -1,14 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Delete Link</title>
-</head>
-<body>
-<form method="POST">
-    {% csrf_token %}
-    <h2>Are you sure?</h2>
-    <input type="submit" value="Delete">
-</form>
-</body>
-</html>
+
+{% extends 'core/base.html' %}
+
+{% block content %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        <p class="alert alert-danger">Are you sure you want delete {{ link.title }}?</p>
+        <input type="submit" class="btn btn-primary" value="Yes">
+        <input type="submit" class="btn btn-danger" value="Cancel" name="cancel">
+    </form>
+{% endblock content %}
+
+
+
+
+
+
+
+

@@ -12,14 +12,14 @@
                 {% if not user.is_authenticated %}
                 <button disabled title="Please login to vote">+</button>
                 {% elif link.pk not in voted %}
-                <button>+</button>
+                <button class="btn btn-light btn-sm">+</button>
                 {% else %}
-                <button>-</button>
+                <button class="btn btn-light btn-sm">-</button>
                 {% endif %}
                 <a href="{{ link.url }}"><b>{{ link.title }}</b></a>
                 <div class="Link-detail">
                     <span>{{ link.votes_total }} points</span> |
-                   <span>submited by {{ new.submitter }}</span> |
+                   <span>submited by {{ link.submitter }}</span> |
                    <a class="Link-link" href="{{ link.get_absolute_url }}">comments: {{ link.comments.count }}</a>
                  </div>
             </form>

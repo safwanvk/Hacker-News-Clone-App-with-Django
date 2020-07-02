@@ -1,10 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Create Comment</title>
-</head>
-<body>
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+    <h1>New comment {{ comments__link.title }}</h1>
+    <p> {{ Link.url }}</p>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input class="btn btn-primary btn-am" type="submit" value="Add">
+    </form>
+
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="col-md-8 card mb-4  mt-3 ">
       <div class="card-body">
         <h3>Leave a comment</h3>

@@ -1,17 +1,22 @@
 {% extends 'core/base.html' %}
-<!DOCTYPE html>
-<html lang="en">
+
 {% block content %}
-<head>
-    <meta charset="UTF-8">
-    <title>Create Link</title>
-</head>
-<body>
+
+<div class="col-md-8 Link-form">
+<h1>Add New</h1>
+
 <form method="POST">
     {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Create">
+    {{ form.as_p}}
+    <input type="Submit" class="btn btn-primary btn-sm" value="Add">
 </form>
-</body>
-</html>
-{% endblock %}
+</div>
+{% endblock content %}
+
+
+
+
+
+
+
+
