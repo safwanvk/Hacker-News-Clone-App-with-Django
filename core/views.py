@@ -1,8 +1,10 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 
 # Create your views here.
 from django.urls import reverse, reverse_lazy
+from django.utils.decorators import method_decorator
 from django.views.generic import ListView, DetailView, UpdateView, CreateView, DeleteView, FormView
 
 from .forms import UserProfileForm, LinkForm, VoteForm, CommentForm
@@ -118,7 +120,7 @@ class VoteFormView(FormView):
         print('invalid')
         return redirect('/')
 
-
+@method_decorator(login_required, name='dispatch')
 class CommentCreateView(CreateView):
     model = Comment
     form_class = CommentForm
