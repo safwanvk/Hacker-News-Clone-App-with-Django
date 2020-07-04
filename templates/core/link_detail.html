@@ -22,6 +22,7 @@
             <li class="list-group-item">{{ comment.body }}
                 <div class="Link-detail">
                     {{ comment.commenter }}
+		    {{ comment.created_on|time }}
                 </div>
             </li>
         </ul>
