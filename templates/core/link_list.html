@@ -20,6 +20,7 @@
                 <div class="Link-detail">
                     <span>{{ link.votes_total }} points</span> |
                    <span>submited by {{ link.submitter }}</span> |
+		   <span>{{ link.submitted_on|time }}</span> |
                    <a class="Link-link" href="{{ link.get_absolute_url }}">comments: {{ link.comments.count }}</a>
                  </div>
             </form>
